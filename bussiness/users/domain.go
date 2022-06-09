@@ -10,7 +10,7 @@ type DomainUser struct {
 	ID        	uint
 	Email	  	string
 	Password    string
-	Nama		string
+	Name		string
 	Birthday	string
 	CreatedAt  	time.Time
 	UpdatedAt  	time.Time

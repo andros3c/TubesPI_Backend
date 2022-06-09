@@ -9,8 +9,8 @@ import (
 type UserResponse struct {
 	ID        	uint			`json:"id"`			
 	Email	  	string			`json:"email"`
-	Nama		string			`json:"nama"`
-	Birthday	string			`json:"tanggal_lahir"`
+	Name		string			`json:"name"`
+	Birthday	string			`json:"birthday"`
 	CreatedAt  	time.Time		`json:"created_at"`
 	UpdatedAt  	time.Time		`json:"updated_at"`
 	DeletedAt 	gorm.DeletedAt  `json:"deleted_at"`
@@ -23,7 +23,7 @@ func FromDomain(domain users.DomainUser) UserResponse{
 	return UserResponse{
 		ID: 			domain.ID,
 		Email: 			domain.Email,
-		Nama: 			domain.Nama,
+		Name: 			domain.Name,
 		Birthday: 		domain.Birthday,		
 		CreatedAt:		domain.CreatedAt,
 		UpdatedAt:		domain.UpdatedAt,     

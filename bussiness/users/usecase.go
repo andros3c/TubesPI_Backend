@@ -31,7 +31,7 @@ func (usecase *UserUseCase)CreateNewUser(domain DomainUser,ctx context.Context)(
 	if domain.Password == ""{
 		return DomainUser{},bussiness.ErrPassEmpty
 	}
-	if domain.Nama == ""{
+	if domain.Name == ""{
 		return DomainUser{},bussiness.ErrNameEmpty
 	}
 

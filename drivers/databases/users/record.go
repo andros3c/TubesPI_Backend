@@ -10,7 +10,7 @@ type User struct {
 	ID        	uint
 	Email	  	string
 	Password    string
-	Nama		string
+	Name		string
 	Birthday	string
 	CreatedAt  	time.Time		`gorm:"<-:create"`		
 	UpdatedAt  	time.Time
@@ -24,7 +24,7 @@ func (User User) ToDomain() users.DomainUser{
 		ID: 			User.ID,
 		Email: 			User.Email,	
 		Password: 		User.Password,
-		Nama: 			User.Nama,
+		Name: 			User.Name,
 		Birthday: 		User.Birthday,	
 		CreatedAt: 		User.CreatedAt,
 		UpdatedAt: 		User.UpdatedAt ,	
@@ -37,7 +37,7 @@ func FromDomain(domain users.DomainUser) User{
 		ID: 			domain.ID,
 		Email:			domain.Email,
 		Password: 		domain.Password,
-		Nama:			domain.Nama,
+		Name:			domain.Name,
 		Birthday: 		domain.Birthday,
 		CreatedAt:    	domain.CreatedAt,
 		UpdatedAt:   	domain.UpdatedAt,

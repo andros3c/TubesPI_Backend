@@ -5,15 +5,15 @@ import "APIRestaurant/bussiness/users"
 type AddUser struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
-	Nama     string `json:"nama"`
-	Birthday string `json:"tanggal_lahir"`
+	Name     string `json:"name"`
+	Birthday string `json:"birthday"`
 }
 
 func (user *AddUser) ToDomain() *users.DomainUser{
 	return &users.DomainUser{
 		Email: 		user.Email,
 		Password: 	user.Password,
-		Nama:		user.Nama,
+		Name:		user.Name,
 		Birthday:  	user.Birthday,	
 	}
 }
