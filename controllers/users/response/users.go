@@ -17,13 +17,6 @@ type UserResponse struct {
 	Token    	string			`json:"token"`
 
 
-
-	// Id        uint   `json:"idWhislist"`
-	// Idbarang  string `json:"idBarang"`
-	// IdUser    string `json:"idUser"`
-	// CreatedAt time.Time
-	// UpdatedAt time.Time
-	// DeletedAt gorm.DeletedAt `gorm:"index"`
 }
 
 func FromDomain(domain users.DomainUser) UserResponse{

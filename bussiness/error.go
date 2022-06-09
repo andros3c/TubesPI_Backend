@@ -37,4 +37,11 @@ var (
 
 	ErrAccNotFound = errors.New("Account Not Found")
 
+	ErrMenuNameEmpty = errors.New("Empty Menu Name ")
+
+	ErrMenuPriceEmpty = errors.New("Price cannot 0")
+
+	ErrCategoryEmpty = errors.New("Empty Menu Category ")
+
+	ErrPictureEmpty = errors.New("Picture Link Cannot be Empty")
 )
