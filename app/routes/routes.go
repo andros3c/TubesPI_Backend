@@ -20,4 +20,5 @@ func (controller RouteControllerList)RouteRegister (c *echo.Echo){
 
 	menus := c.Group("/menu")
 	menus.POST("/add",controller.MenuController.CreateNewMenu,middleware.JWTWithConfig(controller.JWTConfig))
+	menus.GET("/:filter",controller.MenuController.GetAllMenus,middleware.JWTWithConfig(controller.JWTConfig))
 }

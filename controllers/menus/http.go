@@ -36,3 +36,20 @@ func (controller *MenuController) CreateNewMenu(c echo.Context)error{
 	}
 	return controllers.SuccesResponse(c,response.FromDomain(create))
 }
+
+func (controller *MenuController) GetAllMenus(c echo.Context)error{
+	ctx := c.Request().Context()
+	filter := c.Param("filter")
+	menu,err := controller.usecase.GetAllMenus(ctx,filter)
+
+	if err != nil{
+		return controllers.ErrorResponse(c,http.StatusInternalServerError,"Error Happen",err)
+	}
+
+	respon := []response.MenuResponse{}
+
+	for _, values := range menu{
+		respon = append(respon,response.FromDomain(values))
+	}
+return controllers.SuccesResponse(c,respon)
+}

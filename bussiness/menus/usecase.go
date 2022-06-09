@@ -40,3 +40,11 @@ if err != nil{
 return menu,nil
 
 }
+
+func (usecase *MenuUseCase) GetAllMenus(ctx context.Context,filter string)([]DomainMenu,error){
+	result,err := usecase.repo.GetAllMenus(ctx,filter)
+	if err != nil{
+		return []DomainMenu{},err
+	}
+	return result,nil
+}

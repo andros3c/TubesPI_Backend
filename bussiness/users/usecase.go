@@ -77,3 +77,4 @@ func (usecase *UserUseCase)Login(domain DomainUser,ctx context.Context)(DomainUs
 	return user,nil
 
 }
+
