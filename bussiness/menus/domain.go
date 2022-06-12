@@ -23,10 +23,12 @@ type DomainMenu struct{
 type MenuUseCaseInterface interface{
 	CreateNewMenu(domain DomainMenu,ctx context.Context)(DomainMenu,error)
 	GetAllMenus(ctx context.Context,filter string)([]DomainMenu,error)
+	DeleteMenu(ctx context.Context,id int)(DomainMenu,error)
 }
 
 type MenuRepoInterface interface{
 	CreateNewMenu(domain DomainMenu,ctx context.Context)(DomainMenu,error)
 	GetAllMenus(ctx context.Context, filter string)([]DomainMenu,error)
+	DeleteMenu(ctx context.Context,id int)(DomainMenu,error)
 	
 }

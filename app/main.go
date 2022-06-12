@@ -19,6 +19,11 @@ import (
 	menuController "APIRestaurant/controllers/menus"
 	menuRepo "APIRestaurant/drivers/databases/menus"
 
+	bookingUseCase "APIRestaurant/bussiness/booking"
+	bookingController "APIRestaurant/controllers/booking"
+	bookingRepo "APIRestaurant/drivers/databases/booking"
+
+
 
 	_middleware "APIRestaurant/app/middleware"
 
@@ -42,6 +47,7 @@ func init() {
 func dbMigrate(db *gorm.DB){
 	db.AutoMigrate(&userRepo.User{})
 	db.AutoMigrate(&menuRepo.Menu{})
+	db.AutoMigrate(&bookingRepo.Booking{})
 
 }
 
@@ -73,11 +79,15 @@ func main(){
 	menuUseCaseInterface := menuUseCase.NewMenuUseCase(menuRepoInterface,timeoutContext)
 	menucontrollerInterface := menuController.NewMenuController(menuUseCaseInterface)
 	
+	bookingRepoInterface := bookingRepo.NewBookingRepository(db)
+	bookingUseCaseInterface := bookingUseCase.NewBookingUseCase(bookingRepoInterface,timeoutContext)
+	bookingcontrollerInterface := bookingController.NewBookingController(bookingUseCaseInterface)
 	
 
 	routesInit := routes.RouteControllerList{
 	UserController: *usercontrollerInterface,
 	MenuController: *menucontrollerInterface,
+	BookingController: *bookingcontrollerInterface,
 	JWTConfig	: jwt.Init(),
 	}
 	routesInit.RouteRegister(e)

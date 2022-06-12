@@ -13,7 +13,7 @@ type User struct {
 	Name		string
 	Birthday	string
 	CreatedAt  	time.Time		`gorm:"<-:create"`		
-	UpdatedAt  	time.Time
+	UpdatedAt  	time.Time		`gorm:"<-:update"`
 	DeletedAt 	gorm.DeletedAt  `gorm:"index"`
 	
 

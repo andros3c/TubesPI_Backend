@@ -48,3 +48,11 @@ func (usecase *MenuUseCase) GetAllMenus(ctx context.Context,filter string)([]Dom
 	}
 	return result,nil
 }
+
+func (usecase *MenuUseCase) DeleteMenu(ctx context.Context,id int)(DomainMenu,error){
+	menu,err := usecase.repo.DeleteMenu(ctx,id)
+	if err != nil{
+		return DomainMenu{},err
+	}
+	return menu,nil
+}

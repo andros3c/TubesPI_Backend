@@ -6,8 +6,10 @@ import (
 	"APIRestaurant/controllers/menus/request"
 	"APIRestaurant/controllers/menus/response"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
+	"gorm.io/gorm"
 )
 
 type MenuController struct {
@@ -52,4 +54,16 @@ func (controller *MenuController) GetAllMenus(c echo.Context)error{
 		respon = append(respon,response.FromDomain(values))
 	}
 return controllers.SuccesResponse(c,respon)
+}
+
+func (controller *MenuController) DeleteMenu(c echo.Context) error{
+	ctx := c.Request().Context()
+	MenuId, _ := strconv.Atoi(c.Param("id"))
+	menu,err := controller.usecase.DeleteMenu(ctx,MenuId)
+
+	if err != nil{
+		if err == gorm.ErrRecordNotFound{}
+		return controllers.ErrorResponse(c,http.StatusInternalServerError,"Error Happen",err)
+	}
+	return controllers.SuccesResponse(c,menu)
 }
