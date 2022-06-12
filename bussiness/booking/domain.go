@@ -12,6 +12,7 @@ type DomainBooking struct {
 	IDUser        int
 	Ordered       string
 	TableNumber   int
+	Date          string
 	Time          string
 	Confirmed     bool
 	TotalPayment  int
@@ -24,10 +25,14 @@ type DomainBooking struct {
 type BookingUseCaseInterface interface{
 	CreateNewBooking(domain DomainBooking, ctx context.Context)(DomainBooking,error)
 	GetById(id int , ctx context.Context)(DomainBooking,error)
+	GetByDate(domain  DomainBooking , ctx context.Context)([]DomainBooking,error)
+	GetAllBookingData(domain DomainBooking,ctx context.Context)([]DomainBooking,error)
 }
 
 type BookingRepoInterface interface{
 	CreateNewBooking(domain DomainBooking, ctx context.Context)(DomainBooking,error)
 	GetById(id int , ctx context.Context)(DomainBooking,error)
+	GetByDate(domain  DomainBooking , ctx context.Context)([]DomainBooking,error)
+	GetAllBookingData(domain DomainBooking,ctx context.Context)([]DomainBooking,error)
 
 }

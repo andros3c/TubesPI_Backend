@@ -5,6 +5,8 @@ import (
 	"APIRestaurant/controllers"
 	"APIRestaurant/controllers/booking/request"
 	"APIRestaurant/controllers/booking/response"
+	"fmt"
+
 	// "fmt"
 	"net/http"
 	"strconv"
@@ -54,3 +56,33 @@ func (controller *BookingController)GetById(c echo.Context)error{
 	return controllers.SuccesResponse(c,book)
 
 }
+
+func (controller *BookingController)GetByDate(c echo.Context)error{
+	ctx := c.Request().Context()
+	var getDate request.AddBooking
+	err := c.Bind(&getDate)
+
+	if err != nil{
+		return controllers.ErrorResponse(c, http.StatusInternalServerError,"error binding",err)
+
+}
+
+	
+	fmt.Println(getDate)
+
+	book,err := controller.usecase.GetByDate(*getDate.ToDomain(),ctx) 
+
+	if err != nil {
+		return controllers.ErrorResponse(c,http.StatusInternalServerError,"Error Happen",err)
+
+	}
+
+	respons := []response.BookingResponse{}
+	
+	for _, values := range book{
+		respons = append(respons, response.FromDomain(values))
+	}
+	return controllers.SuccesResponse(c,respons)
+}
+
+// func (cont)

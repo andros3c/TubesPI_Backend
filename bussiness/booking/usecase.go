@@ -35,3 +35,21 @@ func (usecase *BookingUseCase)GetById(id int , ctx context.Context)(DomainBookin
 		}
 		return booking,nil
 }
+
+func (usecase *BookingUseCase)GetByDate(domain  DomainBooking, ctx context.Context)([]DomainBooking,error){
+	booking,err := usecase.repo.GetByDate(domain,ctx)
+
+		if err != nil{
+			return []DomainBooking{},err
+		}
+		return booking,nil
+}
+
+func (usecase *BookingUseCase)GetAllBookingData(domain DomainBooking,ctx context.Context)([]DomainBooking,error){
+	booking,err := usecase.repo.GetAllBookingData(domain,ctx) 
+	if err != nil{
+		return []DomainBooking{},ctx.Err()
+
+	}
+	return booking,nil
+}

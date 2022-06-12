@@ -27,4 +27,5 @@ func (controller RouteControllerList)RouteRegister (c *echo.Echo){
 	booking := c.Group("/booking")
 	booking.POST("/add", controller.BookingController.CreateNewBooking,middleware.JWTWithConfig(controller.JWTConfig))
 	booking.GET("/:id",controller.BookingController.GetById,middleware.JWTWithConfig(controller.JWTConfig))
+	booking.POST("/date",controller.BookingController.GetByDate,middleware.JWTWithConfig(controller.JWTConfig))
 }

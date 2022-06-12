@@ -12,6 +12,7 @@ type Booking struct {
 	IDUser        int
 	Ordered       string
 	TableNumber   int
+	Date 		  string
 	Time          string
 	Confirmed     bool
 	TotalPayment  int
@@ -27,6 +28,7 @@ func FromDomain(domain booking.DomainBooking) Booking{
 		IDUser: 			domain.IDUser,
 		Ordered: 			domain.Ordered,
 		TableNumber: 		domain.TableNumber,
+		Date: 				domain.Date,
 		Time: 				domain.Time,
 		Confirmed: 			domain.Confirmed,
 		TotalPayment: 		domain.TotalPayment,
@@ -44,6 +46,7 @@ func (book Booking)ToDomain() booking.DomainBooking{
 		IDUser: 			book.IDUser,
 		Ordered: 			book.Ordered,	
 		TableNumber: 		book.TableNumber,
+		Date: 				book.Date,
 		Time: 				book.Time,
 		Confirmed: 			book.Confirmed,			
 		TotalPayment: 		book.TotalPayment,	
