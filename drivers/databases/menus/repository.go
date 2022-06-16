@@ -60,10 +60,7 @@ func (repo *MenuRepository)GetAllMenus(ctx context.Context, filter string)([]men
 
 func (repo *MenuRepository)DeleteMenu(ctx context.Context,id int)(menus.DomainMenu,error){
 	menu:= Menu{}
-	err := repo.db.Where("id = ?",id).Find(&menu).Error
-	if err == gorm.ErrRecordNotFound {
-		return menus.DomainMenu{}, err
-	}
+
 		
 	res := repo.db.Delete(&menu,id)
 	if res.Error != nil{
@@ -73,3 +70,17 @@ func (repo *MenuRepository)DeleteMenu(ctx context.Context,id int)(menus.DomainMe
 
 	}
 	
+func(repo *MenuRepository)GetById(id int , ctx context.Context)(menus.DomainMenu,error){
+	menu := Menu{}
+
+	err := repo.db.Where("id = ?",id).First(&menu).Error
+
+	if err != nil{
+		return menus.DomainMenu{},err
+	}
+	if err == gorm.ErrRecordNotFound{
+			return  menus.DomainMenu{},gorm.ErrRecordNotFound
+		}
+	
+	return menu.ToDomain(),nil
+}

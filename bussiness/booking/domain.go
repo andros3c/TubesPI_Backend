@@ -26,13 +26,17 @@ type BookingUseCaseInterface interface{
 	CreateNewBooking(domain DomainBooking, ctx context.Context)(DomainBooking,error)
 	GetById(id int , ctx context.Context)(DomainBooking,error)
 	GetByDate(domain  DomainBooking , ctx context.Context)([]DomainBooking,error)
-	GetAllBookingData(domain DomainBooking,ctx context.Context)([]DomainBooking,error)
+	GetAllBookingData(ctx context.Context)([]DomainBooking,error)
+	UpdateBookingData(id int,domain DomainBooking,ctx context.Context)(DomainBooking,error)
+	DeleteBookingData(id int ,ctx context.Context)(DomainBooking,error)
 }
 
 type BookingRepoInterface interface{
 	CreateNewBooking(domain DomainBooking, ctx context.Context)(DomainBooking,error)
 	GetById(id int , ctx context.Context)(DomainBooking,error)
 	GetByDate(domain  DomainBooking , ctx context.Context)([]DomainBooking,error)
-	GetAllBookingData(domain DomainBooking,ctx context.Context)([]DomainBooking,error)
+	GetAllBookingData(ctx context.Context)([]DomainBooking,error)
+	UpdateBookingData(id int,domain DomainBooking,ctx context.Context)(DomainBooking,error)
+	DeleteBookingData(id int ,ctx context.Context)(DomainBooking,error)
 
 }

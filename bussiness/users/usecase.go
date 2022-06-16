@@ -78,3 +78,30 @@ func (usecase *UserUseCase)Login(domain DomainUser,ctx context.Context)(DomainUs
 
 }
 
+func (usecase *UserUseCase) Delete(id int,ctx context.Context)(DomainUser,error){
+	user,err := usecase.repo.Delete(id,ctx)
+	if err != nil{
+		return DomainUser{},err
+	}
+	return user,nil
+}
+
+func (usecase *UserUseCase) Update(userDomain *DomainUser, ctx context.Context) (*DomainUser, error) {
+	existedUser, err := usecase.repo.FindById(int(userDomain.ID),ctx)
+	if err != nil {
+		return &DomainUser{}, err
+	}
+	userDomain.ID = existedUser.ID
+
+	userDomain.Password, err = encrypt.Hash(userDomain.Password)
+	if err != nil{
+		return &DomainUser{},bussiness.ErrInternalServer
+	}
+
+	result, err := usecase.repo.Update(userDomain, ctx)
+	if err != nil {
+		return &DomainUser{}, err
+	}
+
+	return &result, nil
+}

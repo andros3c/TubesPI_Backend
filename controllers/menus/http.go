@@ -5,6 +5,7 @@ import (
 	"APIRestaurant/controllers"
 	"APIRestaurant/controllers/menus/request"
 	"APIRestaurant/controllers/menus/response"
+
 	"net/http"
 	"strconv"
 
@@ -61,6 +62,18 @@ func (controller *MenuController) DeleteMenu(c echo.Context) error{
 	MenuId, _ := strconv.Atoi(c.Param("id"))
 	menu,err := controller.usecase.DeleteMenu(ctx,MenuId)
 
+	if err != nil{
+		if err == gorm.ErrRecordNotFound{}
+		return controllers.ErrorResponse(c,http.StatusInternalServerError,"Error Happen",err)
+	}
+	return controllers.SuccesResponse(c,menu)
+}
+
+func (controller *MenuController) FindById(c echo.Context) error{
+	ctx := c.Request().Context()
+	MenuId, _ := strconv.Atoi(c.Param("id"))
+	
+	menu,err := controller.usecase.GetById(MenuId,ctx)
 	if err != nil{
 		if err == gorm.ErrRecordNotFound{}
 		return controllers.ErrorResponse(c,http.StatusInternalServerError,"Error Happen",err)

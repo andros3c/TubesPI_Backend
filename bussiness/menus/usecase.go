@@ -56,3 +56,12 @@ func (usecase *MenuUseCase) DeleteMenu(ctx context.Context,id int)(DomainMenu,er
 	}
 	return menu,nil
 }
+
+func (usecase *MenuUseCase) GetById(id int , ctx context.Context)(DomainMenu,error){
+	rec,err := usecase.repo.GetById(id,ctx)
+
+	if err != nil{
+		return DomainMenu{},err
+	}
+	return rec,nil
+}

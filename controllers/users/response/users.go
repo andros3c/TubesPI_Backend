@@ -11,6 +11,7 @@ type UserResponse struct {
 	Email	  	string			`json:"email"`
 	Name		string			`json:"name"`
 	Birthday	string			`json:"birthday"`
+	UserRole    string			`json:"user_role"`
 	CreatedAt  	time.Time		`json:"created_at"`
 	UpdatedAt  	time.Time		`json:"updated_at"`
 	DeletedAt 	gorm.DeletedAt  `json:"deleted_at"`
@@ -24,7 +25,8 @@ func FromDomain(domain users.DomainUser) UserResponse{
 		ID: 			domain.ID,
 		Email: 			domain.Email,
 		Name: 			domain.Name,
-		Birthday: 		domain.Birthday,		
+		Birthday: 		domain.Birthday,	
+		UserRole:  		domain.UserRole,	
 		CreatedAt:		domain.CreatedAt,
 		UpdatedAt:		domain.UpdatedAt,     
 		DeletedAt:		domain.DeletedAt,    

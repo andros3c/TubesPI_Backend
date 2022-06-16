@@ -2,8 +2,9 @@ package booking
 
 import (
 	"APIRestaurant/bussiness/booking"
-	"context"
 	
+	"context"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -66,7 +67,7 @@ func(repo *BookingRepository)GetByDate(domain  booking.DomainBooking , ctx conte
 	return BookingDomain,nil
 }
 
-func(repo *BookingRepository)GetAllBookingData(domain booking.DomainBooking,ctx context.Context)([]booking.DomainBooking,error){
+func(repo *BookingRepository)GetAllBookingData(ctx context.Context)([]booking.DomainBooking,error){
 	bookingDb := []Booking{}
 	bookingDomain := []booking.DomainBooking{}
 
@@ -74,5 +75,33 @@ func(repo *BookingRepository)GetAllBookingData(domain booking.DomainBooking,ctx 
 	if err != nil{
 		return []booking.DomainBooking{},err
 	}
+	fmt.Println("success")
+
+	for _,value := range bookingDb{
+		bookingDomain = append(bookingDomain, value.ToDomain() )
+	}
 	return bookingDomain,nil
+	
+	
+}
+
+func(repo *BookingRepository)UpdateBookingData(id int,domain booking.DomainBooking,ctx context.Context)(booking.DomainBooking,error){
+	book := FromDomain(domain)
+
+	res := repo.db.Where("id = ?",id).Save(&book).Error
+
+	if res != nil{
+		return booking.DomainBooking{},res
+	}
+	return book.ToDomain(),nil
+}
+
+func(repo *BookingRepository) DeleteBookingData(id int ,ctx context.Context)(booking.DomainBooking,error){
+	book := Booking{}
+
+	res := repo.db.Delete(&book,id)
+	if res.Error != nil{
+		return booking.DomainBooking{},res.Error
+	}
+	return book.ToDomain(),nil
 }

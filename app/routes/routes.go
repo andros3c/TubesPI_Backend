@@ -1,9 +1,10 @@
 package routes
 
 import (
-	userController "APIRestaurant/controllers/users"
+	bookingController "APIRestaurant/controllers/booking"
 	menuController "APIRestaurant/controllers/menus"
-	bookingController  "APIRestaurant/controllers/booking"
+	userController "APIRestaurant/controllers/users"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -33,4 +34,5 @@ func (controller RouteControllerList)RouteRegister (c *echo.Echo){
 	booking.POST("/date",controller.BookingController.GetByDate,middleware.JWTWithConfig(controller.JWTConfig))
 	booking.GET("/",controller.BookingController.GetAllBookingData,middleware.JWTWithConfig(controller.JWTConfig))
 	booking.PUT("/:id",controller.BookingController.UpdateBookingData,middleware.JWTWithConfig(controller.JWTConfig))
+	booking.DELETE("/delete/:id",controller.BookingController.DeleteBookingData,middleware.JWTWithConfig(controller.JWTConfig))
 }

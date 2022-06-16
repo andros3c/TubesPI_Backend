@@ -7,6 +7,7 @@ type AddUser struct {
 	Password string `json:"password"`
 	Name     string `json:"name"`
 	Birthday string `json:"birthday"`
+	UserRole string `json:"user_role"`
 }
 
 func (user *AddUser) ToDomain() *users.DomainUser{
@@ -15,5 +16,6 @@ func (user *AddUser) ToDomain() *users.DomainUser{
 		Password: 	user.Password,
 		Name:		user.Name,
 		Birthday:  	user.Birthday,	
+		UserRole: user.UserRole,
 	}
 }

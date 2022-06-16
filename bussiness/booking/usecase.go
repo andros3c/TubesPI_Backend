@@ -45,11 +45,27 @@ func (usecase *BookingUseCase)GetByDate(domain  DomainBooking, ctx context.Conte
 		return booking,nil
 }
 
-func (usecase *BookingUseCase)GetAllBookingData(domain DomainBooking,ctx context.Context)([]DomainBooking,error){
-	booking,err := usecase.repo.GetAllBookingData(domain,ctx) 
+func (usecase *BookingUseCase)GetAllBookingData(ctx context.Context)([]DomainBooking,error){
+	booking,err := usecase.repo.GetAllBookingData(ctx) 
 	if err != nil{
-		return []DomainBooking{},ctx.Err()
+		return []DomainBooking{},err
 
+	}
+	return booking,nil
+}
+
+func (usecase *BookingUseCase)UpdateBookingData(id int,domain DomainBooking,ctx context.Context)(DomainBooking,error){
+	booking,err := usecase.repo.UpdateBookingData(id,domain,ctx)
+	if err != nil{
+		return DomainBooking{},err
+	}
+	return booking,nil
+}
+
+func (usecase *BookingUseCase)DeleteBookingData(id int ,ctx context.Context)(DomainBooking,error){
+	booking,err := usecase.repo.DeleteBookingData(id,ctx)
+	if err != nil{
+		return DomainBooking{},err
 	}
 	return booking,nil
 }
